@@ -34,4 +34,23 @@
         @endforeach
 
     </ul>
+
+    <h2 class="mt-8 text-lg font-semibold text-gray-900">
+        Blogs
+    </h2>
+    @foreach ($blogs as $blog)
+    <div class="mt-4">
+        <h3 class="text-md font-semibold text-gray-900">
+            <a href="{{ route('blogs.show', $blog) }}" class="hover:underline">
+                {{ $blog->title }}
+            </a>
+        </h3>
+        <p class="mt-1 text-sm text-gray-500">
+            {{ $blog->user->name }}
+        </p>
+        <p class="mt-1 text-xs text-gray-500">
+            {{ $blog->created_at->diffForHumans() }}
+        </p>
+    </div>
+    @endforeach
 </x-forum.layouts.home>
