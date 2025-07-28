@@ -35,6 +35,7 @@
         <p class="text-gray-200">
             {{ $blog->content }}
         </p>
-
+        
+        <x-forum.comment :object="$blog" />
     </div>
 </x-forum.layouts.app>
