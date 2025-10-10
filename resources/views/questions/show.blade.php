@@ -9,7 +9,9 @@
 
             <div class="flex justify-between">
                 <p class="text-xs text-gray-500">
-                    <span class="font-semibold">{{ $question->user->name }}</span> |
+                    <span class="font-semibold">
+                        {{ $question->user->name }}
+                    </span> |
                     {{ $question->category->name }} |
                     {{ $question->created_at->diffForHumans() }}
                 </p>
@@ -18,7 +20,7 @@
                     <a href="#" class="text-xs font-semibold hover:underline">
                         Edit
                     </a>
-
+                    
                     <form action="#" onsubmit="return confirm('¿Estás seguro de eliminar esta pregunta?');">
                         @csrf
                         @method('DELETE')
@@ -36,34 +38,29 @@
             {{ $question->description }}
         </p>
 
-        <x-forum.comment :object="$question" />
-
+        <liveware:comment :commentable="$question" />
     </div>
-
+    
     <ul class="space-y-4">
-
         @foreach ($question->answers as $answer)
-
         <li>
             <div class="flex items-start gap-2">
                 <div>&hearts;</div>
 
                 <div>
                     <p class="text-sm text-gray-300">
-                        {{{ $answer->content }}}
+                        {{ $answer->content }}
                     </p>
                     <p class="text-xs text-gray-500">
-                        {{ $answer->user->name }} | {{ $answer->created_at->diffForHumans() }}
+                        {{ $answer->user->name }} | 
+                        {{ $answer->created_at->diffForHumans() }}
                     </p>
-
-                    <x-forum.comment :object="$answer" />
+                    
+                    <livewire:comment :commentable="$answer" />
                 </div>
-            </div>
+            </div>  
         </li>
-
         @endforeach
-
     </ul>
 
-    <!-- component: forum/layouts/app -->
 </x-forum.layouts.app>
