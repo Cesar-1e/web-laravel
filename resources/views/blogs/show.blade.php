@@ -36,6 +36,6 @@
             {{ $blog->content }}
         </p>
         
-        <x-forum.comment :object="$blog" />
+        <livewire:comment :commentable="$blog" />
     </div>
 </x-forum.layouts.app>
