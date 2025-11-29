@@ -29,4 +29,25 @@ class Question extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    protected static function booted()
+    {
+        static::deleting(function($question){
+            $question->hearts()->delete();
+
+            $question->comments()->get()->each(function($comment){
+                $comment->hearts()->delete();
+                $comment->delete();
+            });
+
+            $question->answers()->get()->each(function($answer){
+                $answer->hearts()->delete();
+
+                $answer->comments()->get()->each(function($comment){
+                    $comment->hearts()->delete();
+                    $comment->delete();
+                });
+            });
+        });
+    }
 }
