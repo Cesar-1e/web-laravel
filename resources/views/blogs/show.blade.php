@@ -1,6 +1,6 @@
 <x-forum.layouts.app>
     <div class="flex items-center gap-2 w-full my-8">
-        <div>&hearts;</div>
+        <livewire:heart :heartable="$blog" />
 
         <div class="w-full">
             <h2 class="text-2xl font-bold md:text-3xl">
