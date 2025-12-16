@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Question;
 use Illuminate\Http\Request;
 
@@ -20,6 +21,33 @@ class QuestionController extends Controller
         ]);
     }
 
+    public function create()
+    {
+        $categories = Category::all();
+
+        return view('questions.create', [
+            'categories' => $categories,
+        ]);
+    }
+    
+    public function store(Request $request)
+    {
+        $request->validate([
+            'category_id' => 'required|exists:categories,id',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+        ]);
+
+        $question = Question::create([
+            'user_id' => 10,
+            'category_id' => $request->category_id,
+            'title' => $request->title,
+            'description' => $request->description,
+            
+        ]);
+
+        return redirect()->route('questions.show', $question);
+    }
 
     public function show(Question $question)
     {
