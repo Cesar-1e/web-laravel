@@ -24,6 +24,10 @@ Route::delete('questions/{question}', [QuestionController::class, 'destroy'])->n
 
 Route::get('blogs/{blog}', [BlogController::class, 'show'])->name('blogs.show');
 
+Route::get('blogs/{blog}/edit', [BlogController::class, 'edit'])->name('blogs.edit');
+Route::put('blogs/{blog}', [BlogController::class, 'update'])->name('blogs.update');
+Route::delete('blogs/{blog}', [BlogController::class, 'destroy'])->name('blogs.destroy');
+
 Route::post('/answers/{question}', [AnswerController::class, 'store'])->name('answers.store');
 
 Route::view('dashboard', 'dashboard')

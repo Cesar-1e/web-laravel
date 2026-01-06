@@ -11,6 +11,13 @@ class Blog extends Model
     /** @use HasFactory<\Database\Factories\BlogFactory> */
     use HasFactory, HasHeart;
 
+    protected $fillable = [
+        'user_id',
+        'category_id',
+        'title',
+        'content',
+    ];
+
     public function user(){
         return $this->belongsTo(User::class);
     }
