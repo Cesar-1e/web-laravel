@@ -22,7 +22,7 @@ class BlogController extends Controller
     }
 
     public function show(Blog $blog){
-        $userId = 10;
+        $userId = auth()->id();
         $blog->load([
             'user',
             'category',

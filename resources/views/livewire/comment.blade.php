@@ -17,6 +17,7 @@
         @endforeach
     </ul>
 
+    @auth
     @if (!$showForm)
     <p class="text-gray-500">
         <a wire:click="toggle" class="rounded-md text-xs hover:underline cursor-pointer">
@@ -24,7 +25,7 @@
         </a>
     </p>
     @else
-    <form wire:submit="add"> 
+    <form wire:submit="add">
         <div class="flex gap-2">
             <input type="text" wire:model="content" class="w-full text-xs outline-none" placeholder="Escribe tu comentario aquí..." required autofocus>
 
@@ -36,4 +37,5 @@
         @error('content') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
     </form>
     @endif
+    @endauth
 </div>
