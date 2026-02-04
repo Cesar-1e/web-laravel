@@ -17,10 +17,14 @@ Route::get('questions/create', [QuestionController::class, 'create'])->name('que
 Route::post('questions', [QuestionController::class, 'store'])->name('questions.store')->middleware('auth');
 
 Route::get('questions/{question}/edit', [QuestionController::class, 'edit'])->name('questions.edit')->middleware('auth');
-Route::put('questions/{question}', [QuestionController::class, 'update'])->name('questions.update')->middleware('auth');
+Route::put('questions/{question}', [QuestionController::class, 'update'])
+    ->name('questions.update')
+    ->middleware('auth', 'can:update,question');
 
 Route::get('questions/{question}', [QuestionController::class, 'show'])->name('questions.show');
-Route::delete('questions/{question}', [QuestionController::class, 'destroy'])->name('questions.destroy')->middleware('auth');
+Route::delete('questions/{question}', [QuestionController::class, 'destroy'])
+    ->name('questions.destroy')
+    ->middleware('auth', 'can:delete,question');
 
 Route::get('blogs/{blog}', [BlogController::class, 'show'])->name('blogs.show');
 
@@ -42,4 +46,4 @@ Route::middleware(['auth'])->group(function () {
     Route::get('settings/appearance', Appearance::class)->name('settings.appearance');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
