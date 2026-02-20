@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateQuestionRequest;
 use App\Models\Category;
 use App\Models\Question;
 use App\Support\QuestionShowLoader;
+use Illuminate\Support\Facades\Auth;
 
 class QuestionController extends Controller
 {
@@ -36,10 +37,8 @@ class QuestionController extends Controller
     {
 
         $question = Question::create([
-            'user_id' => auth()->id(),
-            'category_id' => $request->category_id,
-            'title' => $request->title,
-            'description' => $request->description,
+            'user_id' => Auth::id(),
+            ...$request->validated(),
             
         ]);
 
@@ -59,11 +58,7 @@ class QuestionController extends Controller
     public function update(UpdateQuestionRequest $request, Question $question)
     {
 
-        $question->update([
-            'category_id' => $request->category_id,
-            'title' => $request->title,
-            'description' => $request->description,
-        ]);
+        $question->update($request->validated());
 
         return redirect()->route('questions.show', $question);
     }
